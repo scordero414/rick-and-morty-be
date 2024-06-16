@@ -55,7 +55,7 @@ const schema = buildSchema(`
 
   type Query {
     commentsByUserCharacter(userCharacterId: Int): [Comment!]!
-    charactersByUser(userId: Int): [UserCharacter!] 
+    charactersByUser(userId: Int!, status: Status, species: String, gender: Gender, name: String): [UserCharacter!] 
   }
 
   type Mutation {

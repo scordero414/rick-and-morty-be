@@ -1,17 +1,24 @@
 export interface Character {
   id: number;
   name: string;
-  status: string;
+  status: Status;
   species: string;
   type: string;
-  gender: string;
-  origin: Location;
-  location: Location;
+  gender: Gender;
+  origin: string;
+  location: string;
   image: string;
   created: Date;
 }
+export enum Status {
+  ALIVE = 'Alive',
+  DEAD = 'Dead',
+  UNKNOWN = 'Unknown',
+}
 
-export interface Location {
-  name: string;
-  url: string;
+export enum Gender {
+  FEMALE = 'Female',
+  MALE = 'Male',
+  GENDERLESS = 'Genderless',
+  UNKNOWN = 'Unknown',
 }
