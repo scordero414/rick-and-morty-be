@@ -45,9 +45,14 @@ Character.init(
     },
   },
   {
-    tableName: 'character',
+    tableName: 'characters',
     sequelize: Sequelize,
+    createdAt: false,
+    updatedAt: false,
+    modelName: 'Character',
   }
 );
+
+// Association definitions
 
 export default Character;

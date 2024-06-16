@@ -2,9 +2,9 @@ import { Model, DataTypes } from 'sequelize';
 import Sequelize from '../sequelize';
 import UserCharacter from './user-character.model';
 
-class User extends Model {}
+class Comment extends Model {}
 
-User.init(
+Comment.init(
   {
     id: {
       allowNull: false,
@@ -12,10 +12,21 @@ User.init(
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    username: {
-      type: DataTypes.STRING(255),
-      unique: true,
+    userCharacterId: {
       allowNull: false,
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'user_characters',
+        key: 'id',
+      },
+    },
+    commentText: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    timestamp: {
+      allowNull: false,
+      type: DataTypes.DATE,
     },
     createdAt: {
       allowNull: false,
@@ -27,10 +38,10 @@ User.init(
     },
   },
   {
-    tableName: 'users',
+    tableName: 'comments',
     sequelize: Sequelize,
-    modelName: 'User',
+    modelName: 'Comment',
   }
 );
 
-export default User;
+export default Comment;
