@@ -4,8 +4,11 @@ import schema from './graphql/schema';
 import resolvers from './graphql/resolvers';
 import dotenv from 'dotenv';
 import logRequestInfo from './middlewares/log-request-info';
+import cors from 'cors';
 dotenv.config();
 const app = express();
+
+app.use(cors());
 
 app.all(
   '/api',

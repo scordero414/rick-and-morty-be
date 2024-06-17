@@ -102,7 +102,7 @@ class Resolvers {
   }) {
     try {
       const userWithCharactersAndComments = await UserCharacter.findAll({
-        where: { userId },
+        where: { userId, deletedAt: null },
         include: [
           {
             model: Character,
@@ -144,13 +144,31 @@ class Resolvers {
   }
 
   @logExecutionTime()
-  async addComment({ userCharacterId, commentText, timestamp }: any) {
+  async addComment({ userCharacterId, commentText }: any) {
     const comment = await Comment.create({
       userCharacterId,
       commentText,
-      timestamp,
+      timestamp: new Date(),
     });
     return comment;
+  }
+
+  @logExecutionTime()
+  async changeCharacterFavorite({ userCharacterId, isFavorite }: any) {
+    await UserCharacter.update(
+      { isFavorite },
+      { where: { id: userCharacterId } } // Provide the missing arguments here
+    );
+    return true;
+  }
+
+  @logExecutionTime()
+  async softDeleteUserCharacter({ userCharacterId }: any) {
+    await UserCharacter.update(
+      { deletedAt: new Date() },
+      { where: { id: userCharacterId } } // Provide the missing arguments here
+    );
+    return true;
   }
 }
 

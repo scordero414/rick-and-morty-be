@@ -63,8 +63,16 @@ const schema = buildSchema(`
     addComment(
       userCharacterId: Int!
       commentText: String!
-      timestamp: String
     ): Comment!
+
+    changeCharacterFavorite(
+      userCharacterId: Int!
+      isFavorite: Boolean!
+    ): Boolean!
+
+    softDeleteUserCharacter(
+      userCharacterId: Int!
+    ): Boolean!
   }
 `);
 
